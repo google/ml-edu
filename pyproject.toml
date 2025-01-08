@@ -15,7 +15,13 @@ keywords = []
 
 # pip dependencies of the project
 # Installed locally with `pip install -e .`
-dependencies = []
+dependencies = [
+  "keras",
+  "matplotlib",
+  "numpy",
+  "pandas",
+  "tensorflow",
+]
 
 # `version` is automatically set by flit to use `ml-edu.__version__`
 dynamic = ["version"]

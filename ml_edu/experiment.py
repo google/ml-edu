@@ -40,7 +40,7 @@ class Experiment:
   settings: ExperimentSettings
   model: keras.Model
   epochs: np.ndarray
-  metrics_history: keras.callbacks.History
+  metrics_history: pd.DataFrame
 
   def get_final_metric_value(self, metric_name: str) -> float:
     """Gets the final value of the given metric for this experiment."""
