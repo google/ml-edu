@@ -51,4 +51,5 @@ jobs:
       with:
         pypi-token: ${{ secrets.PYPI_API_TOKEN }}
         gh-token: ${{ secrets.GITHUB_TOKEN }}
+        pkg-name: google-ml-edu
         parse-changelog: true
