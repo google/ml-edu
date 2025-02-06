@@ -1,7 +1,7 @@
 [project]
 # Project metadata. Available keys are documented at:
 # https://packaging.python.org/en/latest/specifications/declaring-project-metadata
-name = "ml-edu"
+name = "google-ml-edu"
 description = "Python utilities for colabs and other learning material from the Google Machine Learning Education team."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -63,3 +63,6 @@ exclude = [
   # Do not release tests files on PyPI
   "**/*_test.py",
 ]
+
+[tool.flit.module]
+name = "ml_edu"
