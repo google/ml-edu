@@ -23,9 +23,15 @@ To release a new version (e.g. from `1.0.0` -> `2.0.0`):
 
 ## [Unreleased]
 
+## [0.1.1] - 2025-02-06
+
+* First upload to PyPi with basic classes and tests.
+
 ## [0.1.0] - 2024-07-12
 
 * Initial release with project skeleton
 
-[Unreleased]: https://github.com/google/ml-edu/compare/v0.1.0...HEAD
+<!-- mdlint off(LINK_UNUSED_ID) -->
+[Unreleased]: https://github.com/google/ml-edu/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/google/ml-edu/releases/tag/v0.1.1
 [0.1.0]: https://github.com/google/ml-edu/releases/tag/v0.1.0
