@@ -58,10 +58,10 @@ class Experiment:
         feature_name: np.array(test_dataset[feature_name])
         for feature_name in self.settings.input_features
     }
-    metric_values = self.model.evaluate(
-        x=features, y=test_labels, batch_size=self.settings.batch_size
+    return self.model.evaluate(
+        x=features,
+        y=test_labels,
+        batch_size=self.settings.batch_size,
+        verbose=0,
+        return_dict=True,
     )
-    return {
-        name: value
-        for name, value in zip(self.model.metrics_names, metric_values)
-    }
