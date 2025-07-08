@@ -1,4 +1,4 @@
-# Copyright 2024 The ml_edu Authors.
+# Copyright 2025 The ml_edu Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,8 +28,8 @@ class ExperimentSettings:
   learning_rate: float
   number_epochs: int
   batch_size: int
-  classification_threshold: float
   input_features: list[str]
+  classification_threshold: float | None = None
 
 
 @dataclasses.dataclass()

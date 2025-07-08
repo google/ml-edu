@@ -23,6 +23,11 @@ To release a new version (e.g. from `1.0.0` -> `2.0.0`):
 
 ## [Unreleased]
 
+## [0.1.3] - 2025-07-08
+
+* Make classification threshold optional so experiment settings can also be used with regression.
+* Add method to plot model predictions for one and two input features.
+
 ## [0.1.2] - 2025-02-19
 
 * Fix experiment evaluation to return the correct metric values.
@@ -36,7 +41,8 @@ To release a new version (e.g. from `1.0.0` -> `2.0.0`):
 * Initial release with project skeleton
 
 <!-- mdlint off(LINK_UNUSED_ID) -->
-[Unreleased]: https://github.com/google/ml-edu/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/google/ml-edu/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/google/ml-edu/releases/tag/v0.1.3
 [0.1.2]: https://github.com/google/ml-edu/releases/tag/v0.1.2
 [0.1.1]: https://github.com/google/ml-edu/releases/tag/v0.1.1
 [0.1.0]: https://github.com/google/ml-edu/releases/tag/v0.1.0

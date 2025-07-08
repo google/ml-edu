@@ -1,4 +1,4 @@
-# Copyright 2024 The ml_edu Authors.
+# Copyright 2025 The ml_edu Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ import matplotlib.pyplot as plt
 import ml_edu.experiment as ml_experiment
 import numpy as np
 import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
 
 
 def plot_experiment_metrics(
@@ -119,3 +121,72 @@ def compare_experiment(
   ax.set_axisbelow(True)  # Put the grid behind the bars
   ax.grid()
   ax.legend()
+
+
+def plot_model_predictions(
+    experiment: ml_experiment.Experiment,
+    dataset: pd.DataFrame,
+    label_name: str,
+    sample_size: int = 200,
+):
+  """Plot the model's predictions vs the true label values."""
+  random_sample = dataset.sample(n=sample_size).copy()
+  random_sample.reset_index(drop=True, inplace=True)
+
+  features = {
+      feature_name: np.array(random_sample[feature_name])
+      for feature_name in experiment.settings.input_features
+  }
+  predicted_values = experiment.model.predict(features)
+  random_sample['predicted'] = predicted_values
+
+  num_features = len(experiment.settings.input_features)
+  if num_features > 2:
+    raise ValueError(
+        f'Plotting predictions for {num_features} features is not supported.'
+    )
+  if num_features == 1:
+    fig = px.scatter(
+        random_sample,
+        x=experiment.settings.input_features[0],
+        y=label_name,
+        title='Model predictions vs. true values',
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=random_sample[experiment.settings.input_features[0]],
+            y=random_sample['predicted'],
+            mode='lines',
+            name='prediction',
+        )
+    )
+  else:
+    fig = px.scatter_3d(
+        random_sample,
+        x=experiment.settings.input_features[0],
+        y=experiment.settings.input_features[1],
+        z=label_name,
+        title='Model predictions vs. true values',
+    )
+    # To plot the prediction surface, we need to create a meshgrid
+    x_range = np.linspace(
+        random_sample[experiment.settings.input_features[0]].min(),
+        random_sample[experiment.settings.input_features[0]].max(),
+        10,
+    )
+    y_range = np.linspace(
+        random_sample[experiment.settings.input_features[1]].min(),
+        random_sample[experiment.settings.input_features[1]].max(),
+        10,
+    )
+    x_mesh, y_mesh = np.meshgrid(x_range, y_range)
+    z_mesh = experiment.model.predict({
+        experiment.settings.input_features[0]: x_mesh.flatten(),
+        experiment.settings.input_features[1]: y_mesh.flatten(),
+    }).reshape(x_mesh.shape)
+    fig.add_trace(
+        go.Surface(
+            x=x_range, y=y_range, z=z_mesh, name='prediction', opacity=0.5
+        )
+    )
+  fig.show()
