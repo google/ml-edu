@@ -1,4 +1,4 @@
-# Copyright 2024 The ml_edu Authors.
+# Copyright 2025 The ml_edu Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -75,7 +75,6 @@ def test_get_final_metric_value():
           learning_rate=0,
           number_epochs=0,
           batch_size=0,
-          classification_threshold=0,
           input_features=[],
       ),
       model=keras.Model(),
@@ -84,3 +83,13 @@ def test_get_final_metric_value():
   )
   assert exp.get_final_metric_value("loss") == 0.3
   assert exp.get_final_metric_value("accuracy") == 0.6
+
+
+def test_regression_settings():
+  settings = experiment.ExperimentSettings(
+      learning_rate=0.01,
+      number_epochs=1,
+      batch_size=1,
+      input_features=["input_feature"],
+  )
+  assert settings.classification_threshold is None

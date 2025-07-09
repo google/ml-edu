@@ -23,6 +23,9 @@ To release a new version (e.g. from `1.0.0` -> `2.0.0`):
 
 ## [Unreleased]
 
+* Make classification threshold optional so experiment settings can also be used with regression.
+* Add method to plot model predictions for one and two input features.
+
 ## [0.1.2] - 2025-02-19
 
 * Fix experiment evaluation to return the correct metric values.
