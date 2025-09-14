@@ -23,45 +23,45 @@ import pandas as pd
 
 @dataclasses.dataclass()
 class ExperimentSettings:
-  """Lists the hyperparameters and input features used to train am model."""
+    """Lists the hyperparameters and input features used to train am model."""
 
-  learning_rate: float
-  number_epochs: int
-  batch_size: int
-  input_features: list[str]
-  classification_threshold: float | None = None
+    learning_rate: float
+    number_epochs: int
+    batch_size: int
+    input_features: list[str]
+    classification_threshold: float | None = None
 
 
 @dataclasses.dataclass()
 class Experiment:
-  """Stores the experiment settings, metrics, and the resulting model."""
+    """Stores the experiment settings, metrics, and the resulting model."""
 
-  name: str
-  settings: ExperimentSettings
-  model: keras.Model
-  epochs: np.ndarray
-  metrics_history: pd.DataFrame
+    name: str
+    settings: ExperimentSettings
+    model: keras.Model
+    epochs: np.ndarray
+    metrics_history: pd.DataFrame
 
-  def get_final_metric_value(self, metric_name: str) -> float:
-    """Gets the final value of the given metric for this experiment."""
-    if metric_name not in self.metrics_history:
-      raise ValueError(
-          f'Unknown metric {metric_name}: available metrics are'
-          f' {list(self.metrics_history.columns)}'
-      )
-    return self.metrics_history[metric_name].iloc[-1]
+    def get_final_metric_value(self, metric_name: str) -> float:
+        """Gets the final value of the given metric for this experiment."""
+        if metric_name not in self.metrics_history:
+            raise ValueError(
+                f"Unknown metric {metric_name}: available metrics are"
+                f" {list(self.metrics_history.columns)}"
+            )
+        return self.metrics_history[metric_name].iloc[-1]
 
-  def evaluate(
-      self, test_dataset: pd.DataFrame, test_labels: np.ndarray
-  ) -> dict[str, float]:
-    features = {
-        feature_name: np.array(test_dataset[feature_name])
-        for feature_name in self.settings.input_features
-    }
-    return self.model.evaluate(
-        x=features,
-        y=test_labels,
-        batch_size=self.settings.batch_size,
-        verbose=0,
-        return_dict=True,
-    )
+    def evaluate(
+        self, test_dataset: pd.DataFrame, test_labels: np.ndarray
+    ) -> dict[str, float]:
+        features = {
+            feature_name: np.array(test_dataset[feature_name])
+            for feature_name in self.settings.input_features
+        }
+        return self.model.evaluate(
+            x=features,
+            y=test_labels,
+            batch_size=self.settings.batch_size,
+            verbose=0,
+            return_dict=True,
+        )

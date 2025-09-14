@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""ml-edu API."""
+"""Ml-edu API."""
 
 # A new PyPI release will be pushed every time `__version__` is increased.
 # When changing this, also update the CHANGELOG.md.
 # LINT.IfChange
-__version__ = '0.1.3'
+__version__ = "0.1.3"
 # LINT.ThenChange(CHANGELOG.md)
